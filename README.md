@@ -4,7 +4,7 @@ This is a simple demo showing how you can display Server Sent Events using Sprin
 
 To run the demo download or clone the project, and in that directory run the command <code>mvn clean spring-boot:run</code> or import it into your favorite IDE.
 
-Open up a browser and go to localhost:8080 to see it in action.
+Open up a browser and go to localhost:8080 to see it in action or view a demo here: https://sse-demo.cfapps.io/
 
 
 
