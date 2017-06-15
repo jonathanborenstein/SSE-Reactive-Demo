@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+<link rel="stylesheet"
+	href="/webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+	<script type="text/javascript"
+		src="/webjars/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript"
+		src="/webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+	<h3>
+		<p align="center">Some famous books:<p align="center" id="books">
+	</p></h3>
+
+	<br></br>
+
+	<h1>
+		<p align="center">Increase the count every half second:
+		<p id="numbers" align="center"></p>
+	</h1>
+
+	<br></br>
+
+	<h2>
+		<p align="center">Some Famous Quotes:
+		<p align="center" id="quotes"></p>
+	</h2>
+
+	<br></br>
+	<br></br>
+
+	<h1>
+		<p align="center">Time and Date: </p>
+		<p align="center" id="date"></p>
+	</h1>
+
+	<br></br>
+
+	<h2>
+		<p align="center">Random Numbers every 300ms</p>
+		<p align="center" id="random"></p>
+	</h2>
+
+
+
+	<script type="text/javascript">
+		var books = new EventSource("/books");
+		books.onmessage = function(e) {
+
+			document.getElementById("books").innerHTML = e.data;
+
+		}
+
+		var numbers = new EventSource("/numbers");
+		numbers.onmessage = function(e) {
+
+			document.getElementById("numbers").innerHTML = e.data;
+
+		}
+
+		var quotes = new EventSource("/quotes");
+		quotes.onmessage = function(e) {
+
+			document.getElementById("quotes").innerHTML = e.data;
+
+		}
+
+		var date = new EventSource("/date");
+		date.onmessage = function(e) {
+			var obj = JSON.parse(e.data);
+			console.log(e.data);
+			document.getElementById("date").innerHTML = obj.dayOfWeek + ", "
+					+ obj.month + " " + obj.dayOfMonth + " " + obj.year
+					+ " at hour " + obj.hour + " at minute " + obj.minute
+					+ " at second " + obj.second;
+		}
+
+		var random = new EventSource("/random");
+		random.onmessage = function(e) {
+
+			document.getElementById("random").innerHTML = e.data;
+
+		}
+	</script>
+</body>
